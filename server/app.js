@@ -4,31 +4,45 @@ const cookieParser = require('cookie-parser');
 const path = require('path');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
+const session = require('express-session');
+const passport = require('passport');
 const { sequelize } = require('./models');
+const passportConfig = require('./passport');
 
 dotenv.config();
-
 const postRouter = require('./routes/post');
+const authRouter = require('./routes/auth');
 
 const app = express();
-
-sequelize.sync({ froce: false })
+passportConfig();
+sequelize.sync({ force: false })
     .then(() => {
         console.log('DB연결 성공');
     })
     .catch((err) => {
         console.error(err);
     });
-
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(session({
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.COOKIE_SECRET,
+    cookie: {
+        httpOnly: true,
+        secure: false,
+    },
+}));
+app.use(passport.initialize());
+app.use(passport.session());
     
 // routes
 app.use(cors());
 app.use('/api/post', postRouter);
+app.use('/api/auth', authRouter);
 
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터를 찾을 수 없습니다.`);
