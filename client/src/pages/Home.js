@@ -10,8 +10,9 @@ const Home = () => {
 
     const axiosPosts = async () => {
         try {
-            const res = await axios.get('http://localhost:8080/api/post/getPosts');                        
+            const res = await axios.get('http://localhost:8080/api/post/getPosts');
             setPosts(res.data);
+            console.log(document.cookie);
             console.log(res.data);
         } catch (error) {
             console.error(error);
@@ -19,13 +20,19 @@ const Home = () => {
     };
 
     return (
-        <div>
-            <h2>글 목록</h2>
-            <ul>
-                {posts.map((post) => (
-                    <div key={post.id}>{post.content}</div>
-                ))}
-            </ul>
+        <div className="flex justify-center items-center flex-col mt-10">
+            {posts.map((post) => (
+                <div key={post.id} className="border rounded-lg border-blue-600 w-1/2 mb-5 p-3">
+                    <div className="">
+                        <div className="text-gray-700 text-lg pb-2">
+                            {post.User.nickname}
+                        </div>
+                        <div className="p-5 bg-gray-300">
+                            {post.content}
+                        </div>
+                    </div>
+                </div>
+            ))}
         </div>
     );
 };
