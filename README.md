@@ -6,6 +6,12 @@
 - MySql 8
 - Visual Studio Code
 
+## 핵심 라이브러리
+- express
+- sequelize
+- passport
+- recoil
+
 ## 구현예정
 ### 로그인, 회원가입
 - [x] 회원가입
