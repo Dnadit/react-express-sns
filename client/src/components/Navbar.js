@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { loginState } from '../atoms';
 
 const Navbar = () => {
@@ -10,7 +10,7 @@ const Navbar = () => {
     const logout = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.get('http://localhost:8080/api/auth/logout', { withCredentials: true });
+            await axios.get('http://localhost:8080/api/auth/logout', { withCredentials: true });
             setIsLoggedIn(false);
             alert('로그아웃 되었습니다.');
             navigate('/');
@@ -27,6 +27,14 @@ const Navbar = () => {
         }
     };
 
+    const joinProfileButton = () => {
+        if (isLoggedIn) {
+            return <span className='text-white text-lg'><Link to="/profile">내정보</Link></span>
+        } else {
+            return <span className='text-white text-lg'><Link to="/join">회원가입</Link></span>
+        }
+    };
+
     return(
         <div className='bg-gray-800 px-4 flex h-16 items-center justify-between'>
             <div className='ml-10 flex items-baseline space-x-6'>
@@ -35,7 +43,7 @@ const Navbar = () => {
             </div>
             <div className='mr-10 flex items-baseline space-x-6'>
                 {loginLogoutButton()}
-                <span className='text-white text-lg'><Link to="/join">회원가입</Link></span>
+                {joinProfileButton()}
             </div>
         </div>
     );

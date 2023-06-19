@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { loginState, nickname } from "../atoms";
+import { loginState, LoggedInNickname } from "../atoms";
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -10,7 +10,7 @@ const Login = () => {
     const navigate = useNavigate();
     
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
-    const [userNickname, setUserNickname] = useRecoilState(nickname);
+    const [userNickname, setUserNickname] = useRecoilState(LoggedInNickname);
 
     const submitHandler = async (e) => {
         e.preventDefault();

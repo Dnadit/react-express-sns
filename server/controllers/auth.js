@@ -56,33 +56,3 @@ exports.logout = (req, res) => {
         res.json({ message: '로그아웃 성공' });
     });
 };
-
-exports.emailCheck = async (req, res, next) => {
-    const email = req.query.email;
-    try {
-        console.log(email);
-        const findUser = await User.findOne({ where: { email } });
-        if (findUser) {
-            return res.status(400).json({ message: '이미 존재하는 email' });
-        };
-        return res.status(200).json({ message: '사용가능한 email' });
-    } catch (error) {
-        console.error(error);
-        next(error);
-    };
-};
-
-exports.nicknameCheck = async (req, res, next) => {
-    const nickname = req.query.nickname;
-    try {
-        console.log(nickname);
-        const findUser = await User.findOne({ where: { nickname } });
-        if (findUser) {
-            return res.status(400).json({ message: '이미 존재하는 nickname' });
-        };
-        return res.status(200).json({ message: '사용가능한 nickname' });
-    } catch (error) {
-        console.error(error);
-        next(error);
-    };
-};

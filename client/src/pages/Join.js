@@ -38,7 +38,7 @@ const Join = () => {
     const emailCheck = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.get('http://localhost:8080/api/auth/emailCheck', { 
+            const res = await axios.get('http://localhost:8080/api/user/emailCheck', { 
                 params: { 
                     email: email,
                 },
@@ -59,7 +59,7 @@ const Join = () => {
     const nicknameCheck = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.get('http://localhost:8080/api/auth/nicknameCheck', { 
+            const res = await axios.get('http://localhost:8080/api/user/nicknameCheck', { 
                 params: { 
                     nickname: nickname,
                 },

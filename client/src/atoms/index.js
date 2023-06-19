@@ -12,8 +12,8 @@ export const loginState = atom({
     effects_UNSTABLE: [persistAtom],
 });
 
-export const nickname = atom({
-    key: 'nickname',
+export const LoggedInNickname = atom({
+    key: 'LoggedInNickname',
     default: '',
     effects_UNSTABLE: [persistAtom],
 });
