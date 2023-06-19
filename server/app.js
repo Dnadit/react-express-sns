@@ -42,7 +42,7 @@ app.use(passport.session());
 // routes
 app.use(cors({
     origin: 'http://localhost:3000',
-    credentials: true
+    credentials: true,
 }));
 app.use('/api/post', postRouter);
 app.use('/api/auth', authRouter);
@@ -53,11 +53,8 @@ app.use((req, res, next) => {
     next(error);
 });
 app.use((err, req, res, next) => {
-    res.locals.message = err.message;
-    res.locals.error = err;
     res.status = (err.status || 500);
-    console.log(res.status);
-    res.status(res.status).json({        
+    return res.json({        
         message: err.message,    
     });
 });

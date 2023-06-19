@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useRecoilValue } from "recoil";
+import { loginState } from "../atoms";
 
 const Home = () => {
     const [posts, setPosts] = useState([]);
+    const isLoggedIn = useRecoilValue(loginState);
 
     useEffect(() => {
         axiosPosts();
@@ -14,6 +17,7 @@ const Home = () => {
             setPosts(res.data);
             console.log(document.cookie);
             console.log(res.data);
+            console.log(isLoggedIn);
         } catch (error) {
             console.error(error);
         }
