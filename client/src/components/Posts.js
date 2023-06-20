@@ -9,6 +9,7 @@ import { FaUserAlt } from "react-icons/fa";
 
 const Posts = (props) => {
     const [posts, setPosts] = useState([]);
+    const [insertComment, setInsertComment] = useState(false);
     const loggedInNick = useRecoilValue(LoggedInNickname);
     const isLoggedIn = useRecoilValue(loginState);
     const navigate = useNavigate();
@@ -77,8 +78,8 @@ const Posts = (props) => {
                         <div className="p-5 border-dashed border-y border-slate-400">
                             {post.content}
                         </div>
-                        { isLoggedIn && <InputComment postId={post.id} /> }
-                        <Comment postId={post.id} />
+                        { isLoggedIn && <InputComment postId={post.id} insertComment={insertComment} setInsertComment={setInsertComment} /> }
+                        <Comment postId={post.id} insertComment={insertComment} />
                     </div>
                     );
                 })}

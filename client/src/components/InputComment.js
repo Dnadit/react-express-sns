@@ -10,7 +10,11 @@ const InputComment = (props) => {
             const res = await axios.post('http://localhost:8080/api/comment/insert', {
                 content: content,
                 postId: props.postId,
-            }, { withCredentials: true });                     
+            }, { withCredentials: true });  
+            if (res.status === 200) {
+                props.setInsertComment(!props.insertComment);                
+                setContent('');
+            }
         } catch (error) {
             console.error(error);
         };

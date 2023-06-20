@@ -10,7 +10,7 @@ const Comment = (props) => {
 
     useEffect(() => {
         getComments();
-    }, []);
+    }, [props.insertComment]);
 
     const getComments = async () => {
         const res = await axios.get('http://localhost:8080/api/comment/getComments', {
