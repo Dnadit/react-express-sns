@@ -13,6 +13,7 @@ dotenv.config();
 const postRouter = require('./routes/post');
 const authRouter = require('./routes/auth');
 const userRouter = require('./routes/user');
+const commentRouter = require('./routes/comment');
 
 const app = express();
 passportConfig();
@@ -48,6 +49,7 @@ app.use(cors({
 app.use('/api/post', postRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
+app.use('/api/comment', commentRouter);
 
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터를 찾을 수 없습니다.`);

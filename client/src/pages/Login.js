@@ -19,7 +19,6 @@ const Login = () => {
                 email: email,
                 password: password,
             }, { withCredentials: true });  
-            console.log('res', res);   
             setIsLoggedIn(true);
             setUserNickname(res.data.nickname);
             alert(`반갑습니다. ${res.data.nickname}님!`);
