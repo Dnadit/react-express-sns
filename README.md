@@ -1,4 +1,5 @@
 # SNS 만들기
+![프로젝트이미지](/images/project-sns.png)
 
 ## 개발환경
 - Nodejs 18
