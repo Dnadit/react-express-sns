@@ -58,7 +58,7 @@ const Comment = (props) => {
                 return (                    
                     <div key={comment.id} className="flex items-center pt-2">
                         <span className="mr-2 font-bold">{comment.User?.nickname ?? 'unknown'}</span>
-                        <div className="ml-1 font-light text-sm">{comment.content}</div>
+                        <div style={{ whiteSpace: 'pre-line' }} className="ml-1 font-light text-sm">{comment.content}</div>
                         {deleteButton(comment.User?.nickname, comment.id)}                                                
                     </div>                    
                 );

@@ -75,7 +75,7 @@ const Posts = (props) => {
                             </div>
                             {updateDeleteButton(post.User?.nickname, post.id, post.content)}
                         </div>
-                        <div className="p-5 border-dashed border-y border-slate-400">
+                        <div style={{ whiteSpace: 'pre-line' }} className="p-5 border-dashed border-y border-slate-400">
                             {post.content}
                         </div>
                         { isLoggedIn && <InputComment postId={post.id} insertComment={insertComment} setInsertComment={setInsertComment} /> }
