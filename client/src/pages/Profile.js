@@ -51,7 +51,8 @@ const Profile = () => {
             const res = await axios.delete('http://localhost:8080/api/user/withdraw', { withCredentials: true });
             if (res.status === 200) {
                 alert('회원탈퇴 완료');
-                setIsLoggedIn(false);   
+                setIsLoggedIn(false);
+                setNickname('');   
                 navigate('/');
             };
         } catch (error) {
