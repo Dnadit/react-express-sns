@@ -1,6 +1,41 @@
 # SNS 만들기
 ![프로젝트시연](./videos/demoWeb.gif)
 
+## 목차
+- [1. 실행 순서](#실행-순서)
+- [2. 개발 환경](#개발환경)
+- [3. 구현한 기능들](#구현예정)
+
+## 실행 순서
+1. Nodejs18 설치
+2. DB(MySql8) 사용자 생성 및 권한부여
+    ```bash
+    $ sudo mysql -u root -p
+    mysql> CREATE USER 'nodejs'@'localhost' IDENTIFIED BY 'tiger';
+    mysql> GRANT ALL PRIVILEGES ON 'react-express-sns'.* TO 'nodejs'@'localhost' IDENTIFIED BY 'tiger';
+    mysql> exit;
+    ```
+3. 소스코드 클론 & pm2 설치
+    ```bash
+    $ git clone https://github.com/dnadit/react-express-sns
+    $ sudo npm i -g pm2
+    ```
+
+4. client,server directory에 npm install    
+    ```bash
+    $ cd client
+    $ npm i
+    $ cd server
+    $ npm i
+    ```
+
+5. 실행
+    ```bash
+    $ cd server
+    $ npx sequelize db:create --env production
+    $ npm start
+    ```
+
 ## 개발환경
 - Nodejs 18
 - MySql 8
