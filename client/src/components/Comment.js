@@ -3,6 +3,7 @@ import { FaRegComment, FaTrashAlt } from "react-icons/fa";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
 import { LoggedInNickname } from "../atoms";
+import api from "../config/api";
 
 const Comment = (props) => {
     const [comments, setComments] = useState([]);
@@ -13,7 +14,7 @@ const Comment = (props) => {
     }, [props.insertComment]);
 
     const getComments = async () => {
-        const res = await axios.get('http://localhost:8080/api/comment/getComments', {
+        const res = await api.get('/api/comment/getComments', {
             params: {
                 postId: props.postId,
             },
@@ -34,7 +35,7 @@ const Comment = (props) => {
     const deleteComment = async (e, commentId) => {
         e.preventDefault();
         try {
-            const res = await axios.delete('http://localhost:8080/api/comment/deleteComment', {
+            const res = await api.delete('/api/comment/deleteComment', {
                 params: { id: commentId },
                 withCredentials: true,
             });

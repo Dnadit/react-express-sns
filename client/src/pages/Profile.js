@@ -2,6 +2,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { LoggedInNickname, loginState } from "../atoms";
 import { useState } from "react";
 import axios from "axios";
+import api from "../config/api";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
@@ -15,7 +16,7 @@ const Profile = () => {
     const changeNick = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:8080/api/user/changeNick', {
+            const res = await api.post('/api/user/changeNick', {
                 nickname: loggingNickname,
                 newNickname: newNickname,                
             }, { withCredentials: true });
@@ -32,7 +33,7 @@ const Profile = () => {
     const changePassword = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:8080/api/user/changePassword', {
+            const res = await api.post('/api/user/changePassword', {
                 nickname: loggingNickname,
                 newPassword: newPassword,
             }, { withCredentials: true });
@@ -48,7 +49,7 @@ const Profile = () => {
     const withdraw = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.delete('http://localhost:8080/api/user/withdraw', { withCredentials: true });
+            const res = await api.delete('/api/user/withdraw', { withCredentials: true });
             if (res.status === 200) {
                 alert('회원탈퇴 완료');
                 setIsLoggedIn(false);

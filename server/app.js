@@ -8,6 +8,8 @@ const session = require('express-session');
 const passport = require('passport');
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
+const helmet = require('helmet');
+const hpp = require('hpp');
 
 dotenv.config();
 const postRouter = require('./routes/post');
@@ -24,13 +26,8 @@ sequelize.sync({ force: false })
     .catch((err) => {
         console.error(err);
     });
-app.use(morgan('dev'));
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, '../client/build')));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(session({
+
+const sessionOption = {
     resave: false,
     saveUninitialized: false,
     secret: process.env.COOKIE_SECRET,
@@ -38,10 +35,28 @@ app.use(session({
         httpOnly: true,
         secure: false,
     },
-}));
+};
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(morgan('combined'));
+    app.use(helmet({
+        contentSecurityPolicy: false,
+        crossOriginEmbedderPolicy: false,
+        crossOriginResourcePolicy: false,
+    }));
+    app.use(hpp());
+} else {
+    app.use(morgan('dev'));
+}
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(session(sessionOption));
 app.use(passport.initialize());
 app.use(passport.session());
-    
+
 // routes
 app.use(cors({
     origin: 'http://localhost:3000',
@@ -63,8 +78,8 @@ app.use((req, res, next) => {
 });
 app.use((err, req, res, next) => {
     res.status = (err.status || 500);
-    return res.json({        
-        message: err.message,    
+    return res.json({
+        message: err.message,
     });
 });
 

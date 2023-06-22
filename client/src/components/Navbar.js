@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { LoggedInNickname, loginState } from '../atoms';
+import api from "../config/api";
 
 const Navbar = () => {
     const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);   
@@ -11,7 +12,7 @@ const Navbar = () => {
     const logout = async (e) => {
         e.preventDefault();
         try {
-            await axios.get('http://localhost:8080/api/auth/logout', { withCredentials: true });
+            await api.get('/api/auth/logout', { withCredentials: true });
             setIsLoggedIn(false);
             setNickname('');
             alert('로그아웃 되었습니다.');

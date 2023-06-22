@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../config/api";
 
 const Join = () => {
     const [email, setEmail] = useState('');
@@ -14,7 +15,7 @@ const Join = () => {
 
         if (password === confirmPassword) {
             try {
-                const res = await axios.post('http://localhost:8080/api/auth/join', {                
+                const res = await api.post('/api/auth/join', {                
                     email: email,
                     password: password,
                     nickname: nickname,
@@ -38,7 +39,7 @@ const Join = () => {
     const emailCheck = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.get('http://localhost:8080/api/user/emailCheck', { 
+            const res = await api.get('/api/user/emailCheck', { 
                 params: { 
                     email: email,
                 },
@@ -59,7 +60,7 @@ const Join = () => {
     const nicknameCheck = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.get('http://localhost:8080/api/user/nicknameCheck', { 
+            const res = await api.get('/user/nicknameCheck', { 
                 params: { 
                     nickname: nickname,
                 },

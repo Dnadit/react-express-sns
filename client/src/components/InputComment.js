@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import api from "../config/api";
 
 const InputComment = (props) => {
     const [content, setContent] = useState();
@@ -7,7 +8,7 @@ const InputComment = (props) => {
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:8080/api/comment/insert', {
+            const res = await api.post('/api/comment/insert', {
                 content: content,
                 postId: props.postId,
             }, { withCredentials: true });  

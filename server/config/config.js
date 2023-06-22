@@ -1,22 +1,24 @@
-{
+require('dotenv').config();
+
+module.exports = {
   "development": {
     "username": "nodejs",
-    "password": "tiger",
+    "password": process.env.SEQUELIZE_PASSWORD,
     "database": "react-express-sns",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": null,
+    "username": "nodejs",
+    "password": process.env.SEQUELIZE_PASSWORD,
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
+    "username": "nodejs",
+    "password": process.env.SEQUELIZE_PASSWORD,
+    "database": "react-express-sns",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }

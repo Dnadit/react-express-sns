@@ -3,6 +3,7 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { loginState } from "../atoms";
+import api from "../config/api";
 
 const Write = () => {
     const [content, setContent] = useState('');
@@ -29,7 +30,7 @@ const Write = () => {
         };
         if (location.state) {
             try {
-                const res = await axios.patch('http://localhost:8080/api/post/updatePost', {
+                const res = await api.patch('/api/post/updatePost', {
                     content: content,
                     postId: location.state.postId,
                 }, { withCredentials: true });
@@ -44,7 +45,7 @@ const Write = () => {
             };
         } else {
             try {
-                const res = await axios.post('http://localhost:8080/api/post/insert', {
+                const res = await api.post('/api/post/insert', {
                     content: content,
                 }, { withCredentials: true });
                 if (res.status === 200) {

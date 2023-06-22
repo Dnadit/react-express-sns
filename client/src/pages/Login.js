@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { loginState, LoggedInNickname } from "../atoms";
+import api from "../config/api";
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -15,7 +16,7 @@ const Login = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:8080/api/auth/login', {
+            const res = await api.post('/api/auth/login', {
                 email: email,
                 password: password,
             }, { withCredentials: true });  

@@ -6,6 +6,7 @@ import { useRecoilValue } from "recoil";
 import { LoggedInNickname, loginState } from "../atoms";
 import { useNavigate } from "react-router-dom";
 import { FaUserAlt } from "react-icons/fa";
+import api from "../config/api";
 
 const Posts = (props) => {
     const [posts, setPosts] = useState([]);
@@ -15,12 +16,13 @@ const Posts = (props) => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        console.log(process.env.NODE_ENV);
         axiosPosts();
     }, [props.posts]);
 
     const axiosPosts = async () => {
         try {
-            const res = await axios.get('http://localhost:8080/api/post/getPosts');
+            const res = await api.get('/api/post/getPosts');
             if (props.posts.length === 0) {
                 setPosts(res.data);
             } else {
@@ -43,7 +45,7 @@ const Posts = (props) => {
     const deletePost = async (e, postId) => {
         e.preventDefault();
         try {
-            const res = await axios.delete('http://localhost:8080/api/post/deletePost', {
+            const res = await api.delete('/api/post/deletePost', {
                 params: { id: postId },
                 withCredentials: true,
             });

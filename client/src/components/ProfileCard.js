@@ -1,9 +1,10 @@
 import axios from "axios";
+import api from "../config/api";
 
 const ProfileCard = (props) => {
     const clickToMyPosts = async (e) => {
         e.preventDefault();
-        const res = await axios.get('http://localhost:8080/api/post/getMyPosts', { withCredentials: true });
+        const res = await api.get('/api/post/getMyPosts', { withCredentials: true });
         props.setPosts(res.data);
     };
 
