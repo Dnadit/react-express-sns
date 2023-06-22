@@ -26,6 +26,7 @@ sequelize.sync({ force: false })
     });
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../client/build')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
@@ -51,6 +52,10 @@ app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
 app.use('/api/comment', commentRouter);
 
+app.get('/', (req, res) => {    
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터를 찾을 수 없습니다.`);
     error.status = 404;
@@ -63,6 +68,4 @@ app.use((err, req, res, next) => {
     });
 });
 
-app.listen(process.env.PORT, (req, res) => {
-    console.log(process.env.PORT, '번 포트에서 대기중');
-});
+module.exports = app;
