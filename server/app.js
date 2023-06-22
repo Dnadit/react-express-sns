@@ -59,7 +59,7 @@ app.use(passport.session());
 
 // routes
 app.use(cors({
-    origin: ['http://localhost', 'http://localhost:3000'],
+    origin: ['http://localhost', 'http://localhost:3000', 'http://3.38.166.18'],
     credentials: true,
 }));
 app.use('/api/post', postRouter);
