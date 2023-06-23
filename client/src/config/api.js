@@ -2,7 +2,7 @@ import axios from 'axios';
 
 let url = '';
 if (process.env.NODE_ENV === 'production') {
-    url = 'http://localhost:80';
+    url = 'http://3.38.166.185:80';
 } else {
     url = 'http://localhost:8080';
 };
