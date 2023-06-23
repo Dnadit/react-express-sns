@@ -1,6 +1,7 @@
 # SNS 만들기
 ![프로젝트시연](./videos/demoWeb.gif)
 
+- 배포주소접속(http://dnaditsns.duckdns.org/)
 ## 목차
 - [1. 실행 순서](#실행-순서)
 - [2. 개발 환경](#개발환경)
